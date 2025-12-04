@@ -9,7 +9,7 @@
 html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
 body{background:linear-gradient(180deg,var(--bg) 0%, #071228 100%);color:#fff;overflow-x:hidden;overflow-y:auto}
 .pages{height:100%;position:relative}
-.page{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:2rem;transition:transform 700ms cubic-bezier(.2,.9,.2,1),opacity 500ms;backface-visibility:hidden}
+.page{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:2rem;transition:transform 700ms cubic-bezier(.2,.9,.2,1),opacity 500ms;backface-visibility:hidden;overflow-y:auto}
 .page.hidden{opacity:0;transform:translateY(20px) scale(.98);pointer-events:none}
 .card{max-width:900px;width:100%;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:3rem;text-align:center;box-shadow:0 10px 30px rgba(2,6,23,0.6);position:relative}
 h1{font-size:2.1rem;margin:0 0 .4rem;letter-spacing:0.6px}
@@ -27,7 +27,12 @@ h2{font-size:1.1rem;margin-top:0;color:rgba(255,255,255,0.8)}
 .heart::before{transform:translateX(-50%) rotate(-45deg)}
 .heart::after{transform:translateX(-50%) rotate(45deg)}
 @keyframes pulse{0%{transform:scale(.98)}50%{transform:scale(1.06)}100%{transform:scale(.98)}}
-@media (max-width:600px){.shayari{font-size:1.4rem}.card{padding:2rem;border-radius:14px}}
+@media (max-width:600px){
+  .shayari{font-size:1.4rem}
+  .card{padding:1.8rem 1.4rem;border-radius:14px}
+  .heart{width:110px;height:110px}
+  h1{font-size:1.7rem}
+}
 .hint{position:fixed;left:18px;bottom:18px;background:rgba(0,0,0,0.28);padding:.6rem 1rem;border-radius:999px;font-size:.9rem}
 .glitter{background:linear-gradient(90deg,var(--accent), #ffd28a, var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
 footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-size:.9rem}
@@ -62,18 +67,19 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 .blurClear{filter:blur(0);opacity:1;}
 @keyframes bounce { from { transform:translateY(0); } to { transform:translateY(-10px); } }
 @keyframes fadeIn { 0% {opacity:0;} 100% {opacity:1;} }
-/* Side framed photos */
+/* Side framed photos pinned on screen, visible on all pages */
 .side-photo{
-  top:60%;
-  width:min(18vw,150px);
+  position:fixed;
+  bottom:10px;
+  width:clamp(80px,18vw,140px);
   aspect-ratio:3/5;
   border:3px solid rgba(255,255,255,0.85);
   border-radius:18px;
   box-shadow:0 12px 30px rgba(0,0,0,0.7);
   overflow:hidden;
   background:#020617;
-  z-index:2;
-  transform:translateY(-50%);
+  z-index:20;
+  pointer-events:none;
 }
 
 .side-photo img{
@@ -83,25 +89,25 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 }
 
 .side-photo.left{
-  left:-9vw;
-  transform:translateY(-50%) rotate(-7deg);
+  left:10px;
+  transform:rotate(-7deg);
 }
 
 .side-photo.right{
-  right:-9vw;
-  transform:translateY(-50%) rotate(7deg);
+  right:10px;
+  transform:rotate(7deg);
 }
 
 @media (max-width:700px){
   .side-photo{
-    top:55%;
-    width:28vw;
+    bottom:8px;
+    width:90px;
   }
   .side-photo.left{
-    left:-18vw;
+    left:6px;
   }
   .side-photo.right{
-    right:-18vw;
+    right:6px;
   }
 }
 
@@ -111,11 +117,14 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 </head>
 <body>
 
-<aside class="side-slider" aria-label="Scroll slider">
-    <span class="small">Scroll</span>
-    <input id="scrollSlider" type="range" orient="vertical" min="0" max="100" value="0" step="1" aria-label="Slide the whole page">
-    <span class="small">Page</span>
-</aside>
+<!-- Side photos, pinned for all pages -->
+<div class="side-photo left">
+  <img src="575375993_24939243529068577_942051849717105348_n.jpg" alt="Lipsita photo left">
+</div>
+
+<div class="side-photo right">
+  <img src="Screenshot 2025-08-10 200920.jpg" alt="Lipsita photo right">
+</div>
 
 <div class="pages">
 <!-- Page 1 -->
@@ -154,14 +163,6 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 <!-- Page 4 - final -->
 <section class="page hidden" data-index="3">
 <div class="card">
-
-<div class="side-photo left">
-  <img src="575375993_24939243529068577_942051849717105348_n.jpg" alt="Lipsita photo left">
-</div>
-
-<div class="side-photo right">
-  <img src="Screenshot 2025-08-10 200920.jpg" alt="Lipsita photo right">
-</div>
 <div class="heart-wrap">
 <div class="heart" aria-hidden="true"></div>
 <h1 class="glitter">Happy Birthday, Meri Little Mommiii💖!</h1>
@@ -269,7 +270,7 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 
     <div id="passwordContainer" class="hidden" style="
         margin-top:20px;
-        display:flex;
+        display:none;
         gap:10px;
         justify-content:center;
         align-items:center;
@@ -336,6 +337,7 @@ const pages = Array.from(document.querySelectorAll('.page'))
 let index = 0
 const dotsWrap = document.getElementById('dots')
 const cakePieces = Array.from(document.querySelectorAll('.cake-piece'))
+const sidePhotos = Array.from(document.querySelectorAll('.side-photo'))
 
 function renderDots(){
     dotsWrap.innerHTML=''
@@ -352,6 +354,11 @@ function show(i){
     index=i
     renderDots()
     if(index===pages.length-1) finalPageSetup()
+    // Hide side photos on the final page so they don't overlap the last card
+    if(sidePhotos.length){
+        const hide = index === pages.length - 1
+        sidePhotos.forEach(p=>{p.style.display = hide ? 'none' : ''})
+    }
 }
 
 function goTo(i){if(i<0||i>=pages.length)return; show(i)}
@@ -449,6 +456,7 @@ const closeGallery=document.getElementById('closeGallery')
 
 giftButton.addEventListener('click',()=>{
     passwordContainer.classList.remove('hidden')
+    passwordContainer.style.display='flex'
     giftButton.style.display='none'
 })
 
@@ -460,6 +468,7 @@ unlockGift.addEventListener('click',()=>{
         }
         if(passwordContainer){
             passwordContainer.classList.add('hidden')
+            passwordContainer.style.display='none'
         }
     } else {
         giftPassword.style.border='2px solid red'; giftPassword.value=''
