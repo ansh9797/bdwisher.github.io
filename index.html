@@ -64,8 +64,7 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 @keyframes fadeIn { 0% {opacity:0;} 100% {opacity:1;} }
 /* Side framed photos */
 .side-photo{
-  position:absolute;
-  top:40%;
+  top:60%;
   width:min(18vw,150px);
   aspect-ratio:3/5;
   border:3px solid rgba(255,255,255,0.85);
@@ -75,7 +74,6 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
   background:#020617;
   z-index:2;
   transform:translateY(-50%);
-  pointer-events:none; /* don't block clicks on buttons/text */
 }
 
 .side-photo img{
@@ -96,14 +94,14 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 
 @media (max-width:700px){
   .side-photo{
-    top:30%;
-    width:26vw;
+    top:55%;
+    width:28vw;
   }
   .side-photo.left{
-    left:-12vw;
+    left:-18vw;
   }
   .side-photo.right{
-    right:-12vw;
+    right:-18vw;
   }
 }
 
