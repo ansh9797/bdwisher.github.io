@@ -65,7 +65,7 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 /* Side framed photos */
 .side-photo{
   position:absolute;
-  top:50%;
+  top:40%;
   width:min(18vw,150px);
   aspect-ratio:3/5;
   border:3px solid rgba(255,255,255,0.85);
@@ -75,6 +75,7 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
   background:#020617;
   z-index:2;
   transform:translateY(-50%);
+  pointer-events:none; /* don't block clicks on buttons/text */
 }
 
 .side-photo img{
@@ -95,13 +96,14 @@ footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.6);font-si
 
 @media (max-width:700px){
   .side-photo{
-    width:28vw;
+    top:30%;
+    width:26vw;
   }
   .side-photo.left{
-    left:-18vw;
+    left:-12vw;
   }
   .side-photo.right{
-    right:-18vw;
+    right:-12vw;
   }
 }
 
